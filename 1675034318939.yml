@@ -16,7 +16,7 @@ dns:
   default-nameserver:
     - 8.8.8.8
     - 8.8.4.4
-  enhanced-mode: redir-host
+  enhanced-mode: fake-ip
   nameserver:
     - 114.114.114.114 # default valueping
     - 8.8.8.8 # default value
@@ -48,22 +48,44 @@ secret: ''
 
 
 proxies:
-  - name: 'Korean'
-    type: trojan
-    server: shihaoze.eu
-    port: 443
-    password: 'eUxEWdXMA4tALLQo'
-    upd: true
-    tls: true
-    
-  - name: 'Japan'
-    type: trojan
-    server: 970706.xyz
-    port: 443
-    password: '6WKwc5jzNXqV3JiR'
-    upd: true
-    tls: true
 
+  - name: 'Korean'
+    type: vmess
+    server:  shihaoze.eu
+    port: 443
+    uuid: 98c56430-68ca-4b80-8a13-e843014f8f8f
+    alterId: 0
+    cipher: aes-128-gcm
+    network: ws
+    # skip-cert-verify: true
+    ws-opts:
+      path: /6Bfq0z52bxD
+      headers:
+        Host: shihaoze.eu
+    tls: true
+    ws-path: /6Bfq0z52bxD
+    ws-headers:
+      Host: shihaoze.eu
+
+  
+       
+  - name: 'Japan'
+    type: vmess
+    server:  970706.xyz
+    port: 443
+    uuid: faec360b-dd05-4871-a737-3c0fd2b45f12
+    alterId: 0
+    cipher: aes-128-gcm
+    network: ws
+    # skip-cert-verify: true
+    ws-opts:
+      path: /TSdcr
+      headers:
+        Host: 970706.xyz
+    tls: true
+    ws-path: /TSdcr
+    ws-headers:
+      Host: 970706.xyz
 
   - name: 'US'
     type: trojan
@@ -75,22 +97,66 @@ proxies:
 
 
 
+  - name: 'cf'
+    type: wireguard
+    server: 162.159.192.8 #aka peer endpoint
+    port: 2408 #aka peer endpoint port
+    ip: 172.16.0.2 #aka self ip address or address
+    ipv6: 2606:4700:110:8c16:61d5:cbfc:f1eb:9f96 #aka self ipv6 address or address
+    private-key: 1MfdeyMULVhoAjqi2vUzScxT/fzNhjkqxn5QCgSkfTI=
+    public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+    # preshared-key: Zdp+B8+iGb/zmIEMxx32pDQohGiNF8Kvhm4t1Hpgmag=
+    dns: [162.159.36.1, 2606:4700:4700::1111] # optional
+    mtu: 1280
+    allowed-ips : "0.0.0.0/0, ::/0"
+    udp: true
+    reserved: [
+      219,
+      160,
+      248
+    ]
+
+    
+
 
 proxy-groups:
+ 
 - name: PROXY
   type: select
   proxies:
+    - ⚖️ 负载均衡-轮询
+    - ⚖️ 负载均衡-散列
     - 'Auto'
     - 'Korean'
     - 'Japan'
     - 'US'
-
+    - 'cf'
+#添加代理策略组
+- name: ⚖️ 负载均衡-散列
+  type: load-balance
+  url: http://www.google.com/generate_204
+  interval: 300
+  strategy: consistent-hashing
+  proxies:
+    - Korean
+    - Japan
+    - US
+- name: ⚖️ 负载均衡-轮询
+  type: load-balance
+  url: http://www.google.com/generate_204
+  interval: 300
+  strategy: round-robin
+  proxies:
+    - Korean
+    - Japan
+    - US
 - name: Auto
   type: url-test
   proxies:
     - 'Korean'
     - 'Japan'
     - 'US'
+    - 'cf'
   url: 'http://www.gstatic.com/generate_204'
   interval: 86400
 
@@ -217,3 +283,5 @@ bypass:
   - 127.0.0.1
   - 192.168.0.0/16
   - 10.0.0.0/8
+
+
