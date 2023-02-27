@@ -51,7 +51,7 @@ proxies:
 
   - name: 'Korean'
     type: vmess
-    server:  shihaoze.eu
+    server: 162.159.62.93
     port: 443
     uuid: 98c56430-68ca-4b80-8a13-e843014f8f8f
     alterId: 0
@@ -71,7 +71,7 @@ proxies:
        
   - name: 'Japan'
     type: vmess
-    server:  970706.xyz
+    server: 162.159.62.93
     port: 443
     uuid: faec360b-dd05-4871-a737-3c0fd2b45f12
     alterId: 0
@@ -97,26 +97,25 @@ proxies:
 
 
 
-  - name: 'cf'
+  - name: cf
     type: wireguard
-    server: 162.159.192.8 #aka peer endpoint
-    port: 2408 #aka peer endpoint port
-    ip: 172.16.0.2 #aka self ip address or address
-    ipv6: 2606:4700:110:8c16:61d5:cbfc:f1eb:9f96 #aka self ipv6 address or address
-    private-key: 1MfdeyMULVhoAjqi2vUzScxT/fzNhjkqxn5QCgSkfTI=
-    public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
-    # preshared-key: Zdp+B8+iGb/zmIEMxx32pDQohGiNF8Kvhm4t1Hpgmag=
+    server: engage.nanocat.me # domain is supported
+    port: 2408
+    ip: 172.16.0.2
+    ipv6: 2606:4700:110:8dcb:c6e0:b79f:7c2e:2f70 # optional
+    private-key: eFx3bRijJyt8j5TDFPPUa4kwdwv35zLfkQpxNlGoMl0=
+    public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo= # peer public key
+    # preshared-key: # optional
     dns: [162.159.36.1, 2606:4700:4700::1111] # optional
-    mtu: 1280
-    allowed-ips : "0.0.0.0/0, ::/0"
-    udp: true
-    reserved: [
-      219,
-      160,
-      248
-    ]
-
-    
+    mtu: 1280 # optional
+    reserved: [88,229,248] # optional
+    keepalive: 45 # optional
+    # underlying-proxy: # optional
+    # type: trojan
+    # server: your-underlying-proxy
+    # port: 443
+  # password: your-password
+      
 
 
 proxy-groups:
@@ -141,6 +140,7 @@ proxy-groups:
     - Korean
     - Japan
     - US
+    - cf
 - name: ⚖️ 负载均衡-轮询
   type: load-balance
   url: http://www.google.com/generate_204
@@ -150,6 +150,7 @@ proxy-groups:
     - Korean
     - Japan
     - US
+    - cf
 - name: Auto
   type: url-test
   proxies:
@@ -283,5 +284,69 @@ bypass:
   - 127.0.0.1
   - 192.168.0.0/16
   - 10.0.0.0/8
+  
+tiles:
+  - name: Cloudflare.1.1.1.1.panel
+    interval: 600
+    title: '𝙄𝙣𝙛𝙤'
+    icon: 'https://raw.githubusercontent.com/shindgewongxj/WHATSINStash/main/icon/warp.png'
+    backgroundColor: '#f6821f'
+    content: '首次使用前请先打开1.1.1.1 app提取流量信息'
 
 
+http:
+  mitm:
+    - "api.cloudflareclient.com"
+    - "zero-trust-client.cloudflareclient.com"
+    - "boxjs.com"
+    - "boxjs.net"
+    - "*.boxjs.com"
+    - "*.boxjs.net"
+  force-http-engine:
+    - "boxjs.com:80"
+    - "boxjs.net:80"
+    - "*.boxjs.com:80"
+    - "*.boxjs.net:80"
+  script:
+    - match: ^https?:\/\/(api|zero-trust-client)\.cloudflareclient\.com\/(.*)\/reg\/[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$
+      name: Cloudflare.1.1.1.1.request
+      type: request
+      require-body: true
+      timeout: 10
+    - match: ^https?:\/\/(api|zero-trust-client)\.cloudflareclient\.com\/(.*)\/reg\/[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$
+      name: Cloudflare.1.1.1.1.response
+      type: response
+      require-body: true
+      timeout: 10
+    - match: ^https?:\/\/(api|zero-trust-client)\.cloudflareclient\.com\/(.*)\/reg\/t\.[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$
+      name: Cloudflare.1.1.1.1.request
+      type: request
+      require-body: true
+      timeout: 10
+    - match: ^https?:\/\/(api|zero-trust-client)\.cloudflareclient\.com\/(.*)\/reg\/t\.[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$
+      name: Cloudflare.1.1.1.1.response
+      type: response
+      require-body: true
+      timeout: 10
+    - match: ^https?:\/\/(.+\.)?boxjs\.(com|net)
+      name: BoxJs
+      type: request
+      require-body: true
+      timeout: 120
+
+script-providers:
+  BoxJs:
+    url: https://raw.githubusercontent.com/chavyleung/scripts/master/box/chavy.boxjs.js
+    interval: 86400
+  Cloudflare.1.1.1.1.panel:
+    url: https://raw.githubusercontent.com/VirgilClyne/Cloudflare/main/js/Cloudflare.1.1.1.1.panel.js
+    interval: 86400
+  Cloudflare.1.1.1.1.request:
+    url: https://raw.githubusercontent.com/VirgilClyne/Cloudflare/main/js/Cloudflare.1.1.1.1.request.js
+    interval: 86400
+  Cloudflare.1.1.1.1.response:
+    url: https://raw.githubusercontent.com/VirgilClyne/Cloudflare/main/js/Cloudflare.1.1.1.1.response.js
+    interval: 86400
+
+name: BoxJs
+desc: http://boxjs.com
