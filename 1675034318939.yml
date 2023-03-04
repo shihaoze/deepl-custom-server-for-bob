@@ -95,8 +95,6 @@ proxies:
     upd: true
     tls: true
 
-
-
   - name: cf
     type: wireguard
     server: engage.nanocat.me # domain is supported
@@ -157,7 +155,6 @@ proxy-groups:
     - 'Korean'
     - 'Japan'
     - 'US'
-    - 'cf'
   url: 'http://www.gstatic.com/generate_204'
   interval: 86400
 
@@ -254,11 +251,11 @@ rule-providers:
     interval: 86400
 
   applications:
-      type: http
-      behavior: classical
-      url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
-      path: ./ruleset/applications.yaml
-      interval: 86400
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
+    path: ./ruleset/applications.yaml
+    interval: 86400
     
 rules:
   - RULE-SET,applications,DIRECT
@@ -292,7 +289,6 @@ tiles:
     icon: 'https://raw.githubusercontent.com/shindgewongxj/WHATSINStash/main/icon/warp.png'
     backgroundColor: '#f6821f'
     content: '首次使用前请先打开1.1.1.1 app提取流量信息'
-
 
 http:
   mitm:
