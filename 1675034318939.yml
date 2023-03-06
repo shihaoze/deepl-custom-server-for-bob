@@ -229,67 +229,83 @@ script:
 
 rule-providers:
   netflix:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/netflix.yaml
   disney:
+    type: http
     behavior: domain
     interval: 86400
     type: http
     url: https://rules.kr328.app/disney.yaml
   spotify:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/spotify.yaml
   speedtest:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/speedtest.yaml
   github:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/github.yaml
   telegram:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/telegram.yaml
   youtube:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/youtube.yaml
   google:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/google.yaml
   twitter:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/twitter.yaml
   instagram:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/instagram.yaml
   facebook:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/facebook.yaml
   steam:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/steam.yaml
   steam@cn:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/steam@cn.yaml
   microsoft:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/microsoft.yaml
   microsoft@cn:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/microsoft@cn.yaml
   xbox:
+    type: http
     behavior: domain
     interval: 86400
     url: https://rules.kr328.app/xbox.yaml
