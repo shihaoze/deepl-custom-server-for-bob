@@ -151,82 +151,6 @@ proxy-groups:
   url: 'http://www.gstatic.com/generate_204'
   interval: 86400
 
-
-rules:
-  - SCRIPT,quic,REJECT
-  # Netflix
-  - RULE-SET,netflix,Netflix
-  # Disney+
-  - RULE-SET,disney,Disney+
-  # Spotify
-  - RULE-SET,spotify,Spotify
-  # Speedtest
-  - RULE-SET,speedtest,Speedtest
-  # GitHub
-  - RULE-SET,github,选择代理
-  # Telegram
-  - IP-ASN,62014,选择代理,no-resolve
-  - IP-ASN,59930,选择代理,no-resolve
-  - IP-ASN,44907,选择代理,no-resolve
-  - IP-ASN,211157,选择代理,no-resolve
-  - PROCESS-NAME,Telegram.exe,选择代理
-  - PROCESS-NAME,Telegram,选择代理
-  - RULE-SET,telegram,选择代理
-  # YouTube
-  - RULE-SET,youtube,YouTube
-  # Google
-  - RULE-SET,google,选择代理
-  # Twitter
-  - RULE-SET,twitter,选择代理
-  - DOMAIN-SUFFIX,tapbots.com,选择代理
-  # Instagram
-  - RULE-SET,instagram,选择代理
-  # Facebook
-  - RULE-SET,facebook,选择代理
-  # Steam
-  - RULE-SET,steam@cn,DIRECT
-  - RULE-SET,steam,选择代理
-  # Apple LBS
-  - DOMAIN-SUFFIX,iphone-ld.apple.com,DIRECT
-  - DOMAIN-SUFFIX,lcdn-locator.apple.com,DIRECT
-  - DOMAIN-SUFFIX,lcdn-registration.apple.com,DIRECT
-  - DOMAIN-SUFFIX,push.apple.com,DIRECT
-  # Apple OCSP
-  - PROCESS-NAME,trustd,选择代理
-  # Microsoft
-  - RULE-SET,microsoft@cn,DIRECT
-  - RULE-SET,microsoft,选择代理
-  - RULE-SET,xbox,选择代理
-  # common proxy utils
-  - PROCESS-NAME,v2ray,DIRECT
-  - PROCESS-NAME,Surge,DIRECT
-  - PROCESS-NAME,ss-local,DIRECT
-  - PROCESS-NAME,privoxy,DIRECT
-  - PROCESS-NAME,trojan,DIRECT
-  - PROCESS-NAME,trojan-go,DIRECT
-  - PROCESS-NAME,naive,DIRECT
-  - PROCESS-NAME,CloudflareWARP,DIRECT
-  - PROCESS-NAME,Cloudflare WARP,DIRECT
-  - IP-CIDR,162.159.193.0/24,DIRECT,no-resolve
-  - PROCESS-NAME,p4pclient,DIRECT
-  - PROCESS-NAME,Thunder,DIRECT
-  - PROCESS-NAME,DownloadService,DIRECT
-  - PROCESS-NAME,qbittorrent,DIRECT
-  - PROCESS-NAME,Transmission,DIRECT
-  - PROCESS-NAME,fdm,DIRECT
-  - PROCESS-NAME,aria2c,DIRECT
-  - PROCESS-NAME,Folx,DIRECT
-  - PROCESS-NAME,NetTransport,DIRECT
-  - PROCESS-NAME,uTorrent,DIRECT
-  - PROCESS-NAME,WebTorrent,DIRECT
-
-  - GEOIP,LAN,DIRECT
-  - GEOIP,CN,DIRECT
-  - MATCH,默认
-script:
-  shortcuts:
-    quic: network == 'udp' and dst_port == 443
-
 rule-providers:
   netflix:
     type: http
@@ -309,6 +233,74 @@ rule-providers:
     interval: 86400
     url: https://rules.kr328.app/xbox.yaml
 
+rules:
+  - SCRIPT,quic,REJECT
+  # Netflix
+  - RULE-SET,netflix,选择代理
+  # Disney+
+  - RULE-SET,disney,选择代理
+  # Spotify
+  - RULE-SET,spotify,选择代理
+  # Speedtest
+  - RULE-SET,speedtest,选择代理
+  # GitHub
+  - RULE-SET,github,选择代理
+  # Telegram
+  - PROCESS-NAME,Telegram.exe,选择代理
+  - PROCESS-NAME,Telegram,选择代理
+  - RULE-SET,telegram,选择代理
+  # YouTube
+  - RULE-SET,youtube,选择代理
+  # Google
+  - RULE-SET,google,选择代理
+  # Twitter
+  - RULE-SET,twitter,选择代理
+  - DOMAIN-SUFFIX,tapbots.com,选择代理
+  # Instagram
+  - RULE-SET,instagram,选择代理
+  # Facebook
+  - RULE-SET,facebook,选择代理
+  # Steam
+  - RULE-SET,steam@cn,DIRECT
+  - RULE-SET,steam,选择代理
+  # Apple LBS
+  - DOMAIN-SUFFIX,iphone-ld.apple.com,DIRECT
+  - DOMAIN-SUFFIX,lcdn-locator.apple.com,DIRECT
+  - DOMAIN-SUFFIX,lcdn-registration.apple.com,DIRECT
+  - DOMAIN-SUFFIX,push.apple.com,DIRECT
+  # Apple OCSP
+  - PROCESS-NAME,trustd,选择代理
+  # Microsoft
+  - RULE-SET,microsoft@cn,DIRECT
+  - RULE-SET,microsoft,选择代理
+  - RULE-SET,xbox,选择代理
+  # common proxy utils
+  - PROCESS-NAME,v2ray,DIRECT
+  - PROCESS-NAME,Surge,DIRECT
+  - PROCESS-NAME,ss-local,DIRECT
+  - PROCESS-NAME,privoxy,DIRECT
+  - PROCESS-NAME,trojan,DIRECT
+  - PROCESS-NAME,trojan-go,DIRECT
+  - PROCESS-NAME,naive,DIRECT
+  - PROCESS-NAME,CloudflareWARP,DIRECT
+  - PROCESS-NAME,Cloudflare WARP,DIRECT
+  - IP-CIDR,162.159.193.0/24,DIRECT,no-resolve
+  - PROCESS-NAME,p4pclient,DIRECT
+  - PROCESS-NAME,Thunder,DIRECT
+  - PROCESS-NAME,DownloadService,DIRECT
+  - PROCESS-NAME,qbittorrent,DIRECT
+  - PROCESS-NAME,Transmission,DIRECT
+  - PROCESS-NAME,fdm,DIRECT
+  - PROCESS-NAME,aria2c,DIRECT
+  - PROCESS-NAME,Folx,DIRECT
+  - PROCESS-NAME,NetTransport,DIRECT
+  - PROCESS-NAME,uTorrent,DIRECT
+  - PROCESS-NAME,WebTorrent,DIRECT
+
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,选择代理
+
 bypass:
   - "sequoia.apple.com"
   - "seed-sequoia.siri.apple.com"
@@ -323,7 +315,9 @@ tiles:
     icon: 'https://raw.githubusercontent.com/shindgewongxj/WHATSINStash/main/icon/warp.png'
     backgroundColor: '#f6821f'
     content: '首次使用前请先打开1.1.1.1 app提取流量信息'
-
+script:
+  shortcuts:
+    quic: network == 'udp' and dst_port == 443
 http:
   mitm:
     - "api.cloudflareclient.com"
@@ -336,7 +330,8 @@ http:
     - "boxjs.com:80"
     - "boxjs.net:80"
     - "*.boxjs.com:80"
-    - "*.boxjs.net:80"
+    - "*.boxjs.net:80"    
+
   script:
     - match: ^https?:\/\/(api|zero-trust-client)\.cloudflareclient\.com\/(.*)\/reg\/[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$
       name: Cloudflare.1.1.1.1.request
