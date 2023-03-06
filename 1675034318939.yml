@@ -237,7 +237,6 @@ rule-providers:
     type: http
     behavior: domain
     interval: 86400
-    type: http
     url: https://rules.kr328.app/disney.yaml
   spotify:
     type: http
