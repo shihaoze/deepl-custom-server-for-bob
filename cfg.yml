@@ -1,0 +1,3 @@
+vmess=162.159.62.93:443, method=aes-128-gcm, password=98c56430-68ca-4b80-8a13-e843014f8f8f, obfs=wss, obfs-host=shihaoze.eu, obfs-uri=/6Bfq0z52bxD, tls13=true, fast-open=false, udp-relay=false, tag=Korean
+vmess=162.159.62.93:443, method=aes-128-gcm, password=faec360b-dd05-4871-a737-3c0fd2b45f12, obfs=wss, obfs-host=970706.xyz, obfs-uri=/TSdcr, tls13=true, fast-open=false, udp-relay=false, tag=Japan
+trojan=960920.xyz:443, password=Qnfl5PvFm14OWzo9, over-tls=true, tls-host=960920.xyz:443, tls-verification=true, tls13=true, fast-open=false, udp-relay=false, tag=US
