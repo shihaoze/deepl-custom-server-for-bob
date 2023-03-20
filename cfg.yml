@@ -1,4 +1,5 @@
 vmess=162.159.62.93:443, method=aes-128-gcm, password=98c56430-68ca-4b80-8a13-e843014f8f8f, obfs=wss, obfs-host=shihaoze.eu, obfs-uri=/6Bfq0z52bxD, tls13=true, fast-open=false, udp-relay=false, tag=Korean
 vmess=162.159.62.93:443, method=aes-128-gcm, password=faec360b-dd05-4871-a737-3c0fd2b45f12, obfs=wss, obfs-host=970706.xyz, obfs-uri=/TSdcr, tls13=true, fast-open=false, udp-relay=false, tag=Japan
 trojan=960920.xyz:443, password=Qnfl5PvFm14OWzo9, over-tls=true, tls-verification=false, fast-open=false, udp-relay=false, tag=US
-vmess=162.159.62.93:443, method=aes-128-gcm, password=485051a3-ac83-4e55-ab2f-2a18c429d1be, obfs=wss, obfs-host=shihaoze.ml, obfs-uri=/b8tAV, tls-verification=false, fast-open=false, udp-relay=false, aead=true, tag=Japan-2
+vmess=162.159.62.93:443, method=aes-128-gcm, password=485051a3-ac83-4e55-ab2f-2a18c429d1be, obfs=wss, obfs-host=shihaoze.ml, obfs-uri=/b8tAV, tls-verification=false, fast-open=false, udp-relay=false, aead=true, tag=Japan2
+vmess=162.159.62.93:443, method=aes-128-gcm, password=18667e06-8d6c-4663-9d4f-7bac2403accb, obfs=wss, obfs-host=shihaoze.tk, obfs-uri=/OwIdE4cbWi, tls-verification=false, fast-open=false, udp-relay=false, aead=true, tag=US2
