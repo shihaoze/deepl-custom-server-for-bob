@@ -1,0 +1,416 @@
+redir-port: 9797
+tproxy-port: 9898
+mode: rule
+allow-lan: true
+unified-delay: true
+bind-address: '*'
+# info / warning / error / debug / silent
+log-level: silent
+ipv6: false
+geodata-mode: true
+geodata-loader: memconservative
+external-controller: 0.0.0.0:9090 
+# external-controller-tls: 0.0.0.0:9091 # RESTful API HTTPS device
+# secret: "123456"
+external-ui: ./dashboard/dist
+# tcp-concurrent: false
+# inbound-tfo: false
+# global-client-fingerprint: chrome
+# interface-name: "rmnet_data+"
+# routing-mark: 233
+geox-url:
+  mmdb: "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb"
+  geoip: "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geoip.dat"
+  geosite: "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geosite.dat"
+find-process-mode: strict # always, strict, off
+
+profile:
+  store-selected: true
+  store-fake-ip: false
+
+# experimental:
+  # sniff-tls-sni: false
+  # udp-fallback-match: false
+
+# sniffer:
+  # enable: false
+  # ## 对 redir-host 类型识别的流量进行强制嗅探
+  # ## 如：Tun、Redir 和 TProxy 并 DNS 为 redir-host 皆属于
+  # force-dns-mapping: true
+  # parse-pure-ip: true
+  # override-destination: true
+  # sniff:
+    # TLS:
+    # #  ports:[443, 8443]
+    # HTTP:
+      # ports: [80, 8080-8880]
+      # override-destination: true
+  # force-domain:
+    # - +.v2ex.com
+  # # skip-domain:
+    # # - +.google.com
+  # sniffing:
+    # - tls
+    # - http
+  # port-whitelist:
+    # - "80"
+    # - "443"
+
+# tun:
+  # enable: true
+  # # biarkan default utun
+  # device: utun
+  # mtu: 9000
+  # # gvisor / lwip / system
+  # stack: system
+  # dns-hijack:
+    # - any:53
+  # # bagi yg awam, kalau TUN on wajib true, only armv8/64
+  # auto-route: true
+  # auto-detect-interface: true
+  # # end
+  # inet4-address: 172.19.0.1/30
+  # inet6-address: [fdfe:dcba:9876::1/126]
+  # strict_route: false
+  # # include_android_user:
+  # # - 0
+  # # - 10
+  # # include_package:
+  # # - com.android.chrome
+  # # exclude_package:
+  # # - com.android.captiveportallogin
+
+dns:
+  enable: true
+  ipv6: false
+  prefer-h3: true
+  default-nameserver:
+    # cloudflare
+    - '1.1.1.1#BFM'
+    # google
+    - '8.8.8.8'
+  listen: 0.0.0.0:1053
+  use-hosts: true
+  # redir-host / fake-ip
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+  fake-ip-filter:
+    - '+.lan'
+  nameserver:
+    # cloudflare
+    - '1.1.1.1'
+    - 'tls://1.0.0.1:853#BFM'
+    # google
+    - '8.8.8.8#BFM'
+    - 'tls://8.8.4.4:853'
+  # proxy-server-nameserver:
+    # - '1.1.1.1'
+  # nameserver-policy: { "geosite:youtube": [1.1.1.1, 8.8.8.8] }
+
+  fallback:
+    - 'https://8.8.8.8/dns-query'
+    - 'tcp://8.8.4.4'
+    - 'quic://dns.adguard.com:784'
+  fallback-filter:
+    geoip: false
+    geoip-code: '!ID'
+    geosite:
+      # - gfw
+    ipcidr:
+      # - 240.0.0.0/4
+    domain:
+      - '+.google.com'
+      - '+.facebook.com'
+      - '+.youtube.com'
+      - '+.github.com'
+
+hosts:
+  # block update system android
+  'ota.googlezip.net': 127.0.0.1
+  'ota-cache1.googlezip.net': 127.0.0.1
+  'ota-cache2.googlezip.net': 127.0.0.1
+
+
+proxies:
+
+  - name: 'Korean'
+    type: vmess
+    server: 162.159.62.93
+    port: 443
+    uuid: 98c56430-68ca-4b80-8a13-e843014f8f8f
+    alterId: 0
+    cipher: aes-128-gcm
+    network: ws
+    # skip-cert-verify: true
+    ws-opts:
+      path: /6Bfq0z52bxD
+      headers:
+        Host: shihaoze.eu
+    tls: true
+    ws-path: /6Bfq0z52bxD
+    ws-headers:
+      Host: shihaoze.eu
+       
+  - name: 'Japan'
+    type: vmess
+    server: 162.159.62.93
+    port: 443
+    uuid: faec360b-dd05-4871-a737-3c0fd2b45f12
+    alterId: 0
+    cipher: aes-128-gcm
+    network: ws
+    # skip-cert-verify: true
+    ws-opts:
+      path: /TSdcr
+      headers:
+        Host: 970706.xyz
+    tls: true
+    ws-path: /TSdcr
+    ws-headers:
+      Host: 970706.xyz
+
+  - name: 'US'
+    type: trojan
+    server: 960920.xyz
+    port: 443
+    password: 'Qnfl5PvFm14OWzo9'
+    upd: true
+    tls: true
+
+  - name: Japan2
+    type: vmess
+    server: 162.159.62.93
+    port: 443
+    uuid: 485051a3-ac83-4e55-ab2f-2a18c429d1be
+    alterId: 0
+    cipher: aes-128-gcm
+    network: ws
+    # skip-cert-verify: true
+    ws-opts:
+      path: /b8tAV
+      headers:
+        Host: shihaoze.ml
+    tls: true
+    ws-path: /b8tAV
+    ws-headers:
+      Host: shihaoze.ml
+
+  - name: US2
+    type: vmess
+    server: 162.159.62.93
+    port: 443
+    uuid: 18667e06-8d6c-4663-9d4f-7bac2403accb
+    alterId: 0
+    cipher: aes-128-gcm
+    network: ws
+    # skip-cert-verify: true
+    ws-opts:
+      path: /OwIdE4cbWi
+      headers:
+        Host: shihaoze.tk
+    tls: true
+    ws-path: /OwIdE4cbWi
+    ws-headers:
+      Host: shihaoze.tk
+      
+
+
+proxy-groups:
+ 
+- name: PROXY
+  type: select
+  proxies:
+    - ⚖️ 负载均衡-轮询
+    - ⚖️ 负载均衡-散列
+    - 'Auto'
+    - 'Korean'
+    - 'Japan'
+    - 'Japan2'
+    - 'US'
+    - 'US2'
+
+#添加代理策略组
+- name: ⚖️ 负载均衡-散列
+  type: load-balance
+  url: http://www.google.com/generate_204
+  interval: 300
+  strategy: consistent-hashing
+  proxies:
+    - Korean
+    - Japan
+    - Japan2
+    - US
+    - US2
+    - DIRECT
+- name: ⚖️ 负载均衡-轮询
+  type: load-balance
+  url: http://www.google.com/generate_204
+  interval: 300
+  strategy: round-robin
+  proxies:
+    - Korean
+    - Japan
+    - Japan2
+    - US
+    - US2
+    - DIRECT
+- name: Auto
+  type: url-test
+  proxies:
+    - Korean
+    - Japan
+    - Japan2
+    - US
+    - US2
+    - DIRECT
+  url: 'http://www.gstatic.com/generate_204'
+  interval: 86400
+
+rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+
+  icloud:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"
+    path: ./ruleset/icloud.yaml
+    interval: 86400
+
+  apple:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
+    path: ./ruleset/apple.yaml
+    interval: 86400
+
+  google:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
+    path: ./ruleset/google.yaml
+    interval: 86400
+
+  proxy:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+    path: ./ruleset/proxy.yaml
+    interval: 86400
+
+  direct:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    path: ./ruleset/direct.yaml
+    interval: 86400
+
+  private:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
+    path: ./ruleset/private.yaml
+    interval: 86400
+
+  gfw:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/gfw.yaml
+    interval: 86400
+
+  greatfire:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt"
+    path: ./ruleset/greatfire.yaml
+    interval: 86400
+
+  tld-not-cn:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
+    path: ./ruleset/tld-not-cn.yaml
+    interval: 86400
+
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+    path: ./ruleset/telegramcidr.yaml
+    interval: 86400
+
+  cncidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
+    path: ./ruleset/cncidr.yaml
+    interval: 86400
+
+  lancidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
+    path: ./ruleset/lancidr.yaml
+    interval: 86400
+
+  applications:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
+    path: ./ruleset/applications.yaml
+    interval: 86400
+    
+rules:
+  - RULE-SET,applications,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,reject,REJECT
+  - RULE-SET,icloud,DIRECT
+  - RULE-SET,apple,DIRECT
+  - RULE-SET,google,DIRECT
+  - RULE-SET,proxy,PROXY
+  - RULE-SET,direct,DIRECT
+  - RULE-SET,lancidr,DIRECT
+  - RULE-SET,cncidr,DIRECT
+  - RULE-SET,telegramcidr,PROXY
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,PROXY
+
+proxy-providers:
+  '@BFM':
+    type: file
+    path: ./provide/domestic.yml
+    # filter: 'xxx'  # Mendukung ekspresi reguler untuk memfilter berdasarkan nama node
+    # exclude-filter: 'ctb' # Mendukung ekspresi reguler untuk dikecualikan berdasarkan nama node
+    # exclude-type: 'ss|http' # Tidak mendukung ekspresi reguler, dipisahkan dengan '|', dikecualikan menurut jenis node
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 1200
+
+
+## rules clash premium
+# rule-providers:
+  # block:
+    # type: http
+    # behavior: domain
+    # url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    # path: ./ruleset/block.yaml
+    # interval: 86400
+# script:
+  # shortcuts:
+    # # quic: network == 'udp' and dst_port == 443
+    # youshit: network == 'udp' and ('youtube' in host or 'googlevideo' in host)
+# rules:
+  # - DOMAIN-SUFFIX,googlesyndication.com,BFM
+  # - RULE-SET,block,block
+  # # - SCRIPT,quic,block
+  # - SCRIPT,youshit,block
+  # - MATCH,BFM
