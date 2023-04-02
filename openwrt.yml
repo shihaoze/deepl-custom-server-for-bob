@@ -213,8 +213,6 @@ proxies:
     ws-headers:
       Host: shihaoze.tk
       
-
-
 proxy-groups:
  
 - name: PROXY
@@ -382,35 +380,3 @@ rules:
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,DIRECT
   - MATCH,PROXY
-
-proxy-providers:
-  '@BFM':
-    type: file
-    path: ./provide/domestic.yml
-    # filter: 'xxx'  # Mendukung ekspresi reguler untuk memfilter berdasarkan nama node
-    # exclude-filter: 'ctb' # Mendukung ekspresi reguler untuk dikecualikan berdasarkan nama node
-    # exclude-type: 'ss|http' # Tidak mendukung ekspresi reguler, dipisahkan dengan '|', dikecualikan menurut jenis node
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 1200
-
-
-## rules clash premium
-# rule-providers:
-  # block:
-    # type: http
-    # behavior: domain
-    # url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
-    # path: ./ruleset/block.yaml
-    # interval: 86400
-# script:
-  # shortcuts:
-    # # quic: network == 'udp' and dst_port == 443
-    # youshit: network == 'udp' and ('youtube' in host or 'googlevideo' in host)
-# rules:
-  # - DOMAIN-SUFFIX,googlesyndication.com,BFM
-  # - RULE-SET,block,block
-  # # - SCRIPT,quic,block
-  # - SCRIPT,youshit,block
-  # - MATCH,BFM
