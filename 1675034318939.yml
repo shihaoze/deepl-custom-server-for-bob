@@ -93,6 +93,14 @@ proxies:
     upd: true
     tls: true
 
+  - name: 'HongKong'
+    type: trojan
+    server: shz123.cf
+    port: 443
+    password: 'KO3I0hJnxAgWgxMo'
+    upd: true
+    tls: true
+
   - name: Japan2
     type: vmess
     server: 162.159.62.93
@@ -142,6 +150,7 @@ proxy-groups:
     - 'Korean'
     - 'Japan'
     - 'US'
+    - 'HongKong'
     - 'Japan2'
     - 'US2'
     
@@ -157,6 +166,7 @@ proxy-groups:
     - US
     - Japan2
     - US2
+    - HongKong
 - name: ⚖️ 负载均衡-轮询
   type: load-balance
   url: http://www.google.com/generate_204
@@ -168,6 +178,7 @@ proxy-groups:
     - US
     - Japan2
     - US2
+    - HongKong
 - name: Auto
   type: url-test
   proxies:
@@ -176,6 +187,7 @@ proxy-groups:
     - 'US'
     - 'Japan2'
     - 'US2'
+    - 'HongKong'
   url: 'http://www.gstatic.com/generate_204'
   interval: 86400
 
