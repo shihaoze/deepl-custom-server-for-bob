@@ -1,4 +1,94 @@
-vmess=104.16.77.195:443, method=aes-128-gcm, password=98c56430-68ca-4b80-8a13-e843014f8f8f, obfs=wss, obfs-host=shihaoze.eu, obfs-uri=/6Bfq0z52bxD, tls13=true, fast-open=false, udp-relay=false, tag=Korean
-vmess=104.16.77.195:443, method=aes-128-gcm, password=faec360b-dd05-4871-a737-3c0fd2b45f12, obfs=wss, obfs-host=970706.xyz, obfs-uri=/TSdcr, tls13=true, fast-open=false, udp-relay=false, tag=Japan
-vmess=104.16.77.195:443, method=aes-128-gcm, password=679309ef-243a-4c1b-ac57-c6de6d419378, obfs=wss, obfs-host=960920.xyz, obfs-uri=/Ilz7q, tls13=true, fast-open=false, udp-relay=false, tag=Japan2
-vmess=104.18.20.25:443, method=aes-128-gcm, password=18667e06-8d6c-4663-9d4f-7bac2403accb, obfs=wss, obfs-host=shihaoze.tk, obfs-uri=/OwIdE4cbWi, tls-verification=false, fast-open=false, udp-relay=false, aead=true, tag=US2
+-   name: Cloudflare
+    type: wireguard
+    server: 162.159.192.102
+    port: 859
+    ip: 172.16.0.2
+    ipv6: 2606:4700:110:8d1a:a2f8:d8d0:3448:55f6 # optional
+    private-key: qNHYj4748Rm/nvMxJPiW7Xvcm+TmdQD7L2FjNaJnLkc=
+    public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo= # peer public key
+    # preshared-key: # optional
+    dns: [162.159.36.1, 2606:4700:4700::1111] # optional
+    mtu: 1280 # optional
+    reserved: [244,120,48] # optional
+    keepalive: 45 # optional
+
+-   name: Korean
+    type: vmess
+    server: 104.16.77.195 
+    port: 443
+    uuid: 98c56430-68ca-4b80-8a13-e843014f8f8f
+    alterId: 0
+    cipher: aes-128-gcm
+    network: ws
+    # skip-cert-verify: true
+    ws-opts:
+        path: /6Bfq0z52bxD
+        headers:
+            Host: shihaoze.eu
+    tls: true
+    ws-path: /6Bfq0z52bxD
+    ws-headers:
+        Host: shihaoze.eu
+
+        
+-   name: Japan
+    type: vmess
+    server: 104.16.77.195 
+    port: 443
+    uuid: faec360b-dd05-4871-a737-3c0fd2b45f12
+    alterId: 0
+    cipher: aes-128-gcm
+    network: ws
+    # skip-cert-verify: true
+    ws-opts:
+        path: /TSdcr
+        headers:
+            Host: 970706.xyz
+    tls: true
+    ws-path: /TSdcr
+    ws-headers:
+        Host: 970706.xyz
+
+# -   name: US
+#     type: hysteria
+#     server: 150.230.40.219
+#     port: 31358
+#     password: 28a67a9a
+#     sni: www.bing.com
+#     skip-cert-verify: true
+
+-   name: Japan2
+    type: vmess
+    server: 152.69.192.36
+    port: 443
+    uuid: 679309ef-243a-4c1b-ac57-c6de6d419378
+    alterId: 0
+    cipher: aes-128-gcm
+    network: ws
+    # skip-cert-verify: true
+    ws-opts:
+        path: /Ilz7q
+        headers:
+            Host: 960920.xyz
+    tls: true
+    ws-path: /Ilz7q
+    ws-headers:
+        Host: 960920.xyz
+
+-   name: US2
+    type: vmess
+    server: 104.18.20.25
+    port: 443
+    uuid: 18667e06-8d6c-4663-9d4f-7bac2403accb
+    alterId: 0
+    cipher: aes-128-gcm
+    network: ws
+    # skip-cert-verify: true
+    ws-opts:
+        path: /OwIdE4cbWi
+        headers:
+            Host: shihaoze.tk
+    tls: true
+    ws-path: /OwIdE4cbWi
+    ws-headers:
+        Host: shihaoze.tk
